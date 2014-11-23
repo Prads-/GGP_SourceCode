@@ -1,0 +1,7 @@
+{
+  "gameName": "Gomoku",  
+  "rulesheet": "gomoku.kif",
+  "stylesheet": "gomoku.xsl",
+  "description": "gomoku.txt",
+  "user_interface": "gomoku.js"
+}

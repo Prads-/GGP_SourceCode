@@ -1,0 +1,2 @@
+Two players take turns; each player makes their mark on one square
+of a 15x15 board each turn. Five marks in a row (horizontally, vertically, or diagonally) to win.
