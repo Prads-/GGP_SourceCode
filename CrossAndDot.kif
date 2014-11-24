@@ -1,0 +1,112 @@
+;;; Cross and Dot game
+
+;;; Roles
+(role crossPlayer)
+(role dotPlayer)
+
+;;; Constants
+
+(index 1) (index 2) (index 3) (index 4) (index 5) (index 6) (index 7) (index 8) (index 9) (index 10)
+(index 11) (index 12) (index 13) (index 14) (index 15) (index 16) (index 17) (index 18) (index 19) (index 20)
+
+(succ 1 2) (succ 2 3) (succ 3 4) (succ 4 5) (succ 5 6) (succ 6 7) (succ 7 8) (succ 8 9) (succ 9 10)
+(succ 10 11) (succ 11 12) (succ 12 13) (succ 13 14) (succ 14 15) (succ 15 16) (succ 16 17) (succ 17 18) (succ 18 19) (succ 19 20)
+
+;;; Base and input
+
+(<= (base (cell ?c x)) (index ?c))
+(<= (base (cell ?c d)) (index ?c))
+(<= (base (cell ?c b)) (index ?c))
+(<= (base (control ?r)) (role ?r))
+
+(<= (input ?r (mark ?c)) (index ?c) (role ?r))
+(<= (input ?r noop) (role ?r))
+
+;;; Initial state
+
+(<= (init (cell ?c b)) (index ?c))
+(init (control crossPlayer))
+
+;;; Dynamic Components
+
+(<= (next (cell ?c x))
+    (does crossPlayer (mark ?c))
+    (true (cell ?c b)))
+    
+(<= (next (cell ?c d))
+    (does dotPlayer (mark ?c))
+    (true (cell ?c b)))
+    
+(<= (next (cell ?c ?m))
+    (true (cell ?c ?m))
+    (distinct ?m b))
+    
+(<= (next (cell ?c b))
+    (does ?r (mark ?d))
+    (true (cell ?c b))
+    (distinct ?c ?d))
+    
+(<= (next (control crossPlayer))
+    (true (control dotPlayer)))
+    
+(<= (next (control dotPlayer))
+    (true (control crossPlayer)))
+    
+(<= (row ?c ?m 1)
+    (true (cell ?c ?m)))
+    
+(<= (row ?c ?m ?k)
+    (true (cell ?c ?m))
+    (succ ?c ?c1)
+    (succ ?k1 ?k)
+    (row ?c1 ?m ?k1))
+    
+(<= (line ?m)
+    (row ?c ?m 4))
+    
+(<= open
+    (true (cell ?c b)))
+    
+;;; Legal input
+
+(<= (legal ?r (mark ?c))
+    (true (cell ?c b))
+    (true (control ?r)))
+    
+(<= (legal crossPlayer noop)
+    (true (control dotPlayer)))
+    
+(<= (legal dotPlayer noop)
+    (true (control crossPlayer)))
+    
+;;; Goal
+
+(<= (goal crossPlayer 100)
+    (line x))
+    
+(<= (goal dotPlayer 100)
+    (line d))
+    
+(<= (goal crossPlayer 50)
+    (not (line x))
+    (not (line d))
+    (not open))
+    
+(<= (goal dotPlayer 50)
+    (not (line x))
+    (not (line d))
+    (not open))
+    
+(<= (goal crossPlayer 0)
+    (line d))
+    
+(<= (goal dotPlayer 0)
+    (line x))
+    
+;;; Terminal
+
+(<= terminal (line x))
+
+(<= terminal (line d))
+
+(<= terminal (not open))
