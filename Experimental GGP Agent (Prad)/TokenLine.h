@@ -21,6 +21,7 @@ public:
 	
 	std::string getTypeString() const;
 	void print(bool newline = true) const;
+	std::string toString() const;
 };
 
 #endif

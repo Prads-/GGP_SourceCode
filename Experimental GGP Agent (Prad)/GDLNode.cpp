@@ -18,8 +18,10 @@
 #include "PropositionNode.h"
 #include "TerminalNode.h"
 #include "TrueNode.h"
+#include "RelationNode.h"
+#include "RoleNode.h"
 
-GDLNode *GDLNode::createGDLNode(const TokenLine &tokenLine) {
+GDLNode *GDLNode::createGDLNodes(const TokenLine &tokenLine) {
 	GDLNode *node = 0;
 	switch (tokenLine.getType()) {
 		case TOKEN_LINE_BASE:
@@ -56,13 +58,19 @@ GDLNode *GDLNode::createGDLNode(const TokenLine &tokenLine) {
 			createOrNode(tokenLine, &node);
 			break;
 		case TOKEN_LINE_RELATION:
-			createRelationNode(tokenLine, &node);
+			createPropositionNode(tokenLine, &node);
 			break;
 		case TOKEN_LINE_TERMINAL:
 			createTerminalNode(&node);
 			break;
 		case TOKEN_LINE_TRUE:
 			createTrueNode(tokenLine, &node);
+			break;
+		case TOKEN_LINE_ROLE:
+			node = createRoleNode(tokenLine);
+			break;
+		default:
+			throw Exception("Syntax error in line: " + tokenLine.toString());
 	}
 	return node;
 }
@@ -70,6 +78,40 @@ GDLNode *GDLNode::createGDLNode(const TokenLine &tokenLine) {
 void GDLNode::breakDownTokenLine(const TokenLine &tokenLine, std::vector<TokenLine> &tokenLinesOut) {
 	TokenLiner tokenLiner;
 	tokenLiner.createLines(tokenLine.getTokens(), tokenLinesOut);
+}
+
+GDLNode *GDLNode::createRelationNode(const TokenLine &tokenLine) {
+	std::vector<TokenLine> tokenLines;
+	
+	breakDownTokenLine(tokenLine, tokenLines);
+	try {
+		std::string name = tokenLines.at(0).getTokens().at(0).getTokenStr();
+		std::vector<Token> arguments;
+		for (size_t i = 1; i < tokenLines.size(); ++i) {
+			if (tokenLines[i].getTokens().at(0).getType() != TOKENIZER_TOKEN_TYPE_TERM) {
+				throw Exception("Syntax error: Invalid arguments in relation");
+			}
+			arguments.push_back(tokenLines[i].getTokens().at(0));
+		}
+		return (new RelationNode(name, arguments));
+	} catch (std::out_of_range) {
+		throw Exception("Syntax error while creating Relation node");
+	}
+}
+
+GDLNode *GDLNode::createRoleNode(const TokenLine &tokenLine) {
+	std::vector<TokenLine> tokenLines;
+	
+	breakDownTokenLine(tokenLine, tokenLines);
+	try {
+		int type = tokenLines.at(1).getTokens().at(0).getType();
+		if (type != TOKENIZER_TOKEN_TYPE_TERM && type != TOKENIZER_TOKEN_TYPE_VAR) {
+			throw Exception("Syntax error: Invalid argument for role");
+		}
+		return (new RoleNode(tokenLines[1].getTokens()[0]));
+	} catch (std::out_of_range) {
+		throw Exception("Syntax error while creating Role node");
+	}
 }
 
 void GDLNode::createBaseNode(const TokenLine &tokenLine, GDLNode **nodeOut) {
@@ -82,7 +124,7 @@ void GDLNode::createBaseNode(const TokenLine &tokenLine, GDLNode **nodeOut) {
 			throw Exception("Syntax error: Base must have proposition as argument");
 		}
 		
-		createRelationNode(tokenLines.at(1), (GDLNode**)&proposition);
+		createPropositionNode(tokenLines.at(1), (GDLNode**)&proposition);
 		*nodeOut = new BaseNode(proposition);
 	} catch (std::out_of_range) {
 		throw Exception("Syntax error while creating base node");
@@ -94,10 +136,10 @@ void GDLNode::createIfNode(const TokenLine &tokenLine, GDLNode **nodeOut) {
 	
 	breakDownTokenLine(tokenLine, tokenLines);
 	try {
-		GDLNode *head = createGDLNode(tokenLines.at(1));
+		GDLNode *head = createGDLNodes(tokenLines.at(1));
 		std::vector<GDLNode*> body;
 		for (size_t i = 2; i < tokenLines.size(); ++i) {
-			GDLNode *b = createGDLNode(tokenLines[i]);
+			GDLNode *b = createGDLNodes(tokenLines[i]);
 			body.push_back(b);
 		}
 		*nodeOut = new IfNode(head, body);
@@ -121,7 +163,7 @@ void GDLNode::createLegalNode(const TokenLine &tokenLine, GDLNode **nodeOut) {
 		
 		Token role = tokenLines[1].getTokens()[0];
 		PropositionNode *proposition;
-		createRelationNode(tokenLines[2],(GDLNode**)&proposition);
+		createPropositionNode(tokenLines[2],(GDLNode**)&proposition);
 		*nodeOut = new LegalNode(role, proposition);
 	} catch (std::out_of_range) {
 		throw Exception("Syntax error while creating Legal node");
@@ -138,7 +180,7 @@ void GDLNode::createTrueNode(const TokenLine &tokenLine,GDLNode **nodeOut) {
 		}
 		
 		PropositionNode *proposition;
-		createRelationNode(tokenLines.at(1), (GDLNode**)&proposition);
+		createPropositionNode(tokenLines.at(1), (GDLNode**)&proposition);
 		*nodeOut = new TrueNode(proposition);
 	} catch (std::out_of_range) {
 		throw Exception("Syntax error while creating True node");
@@ -155,7 +197,7 @@ void GDLNode::createNotNode(const TokenLine &tokenLine, GDLNode **nodeOut) {
 		}
 		
 		PropositionNode *proposition;
-		createRelationNode(tokenLines.at(1), (GDLNode**)&proposition);
+		createPropositionNode(tokenLines.at(1), (GDLNode**)&proposition);
 		*nodeOut = new NotNode(proposition);
 	} catch (std::out_of_range) {
 		throw Exception("Syntax error while creating Not node");
@@ -172,7 +214,7 @@ void GDLNode::createNextNode(const TokenLine &tokenLine, GDLNode **nodeOut) {
 		}
 		
 		PropositionNode *proposition;
-		createRelationNode(tokenLines.at(1), (GDLNode**)&proposition);
+		createPropositionNode(tokenLines.at(1), (GDLNode**)&proposition);
 		*nodeOut = new NextNode(proposition);
 	} catch (std::out_of_range) {
 		throw Exception("Syntax error while creating Next node");
@@ -187,12 +229,13 @@ void GDLNode::createOrNode(const TokenLine &tokenLine, GDLNode **nodeOut) {
 		std::vector<PropositionNode*> propositions;
 		for (TokenLine &tokenLine : tokenLines) {
 			try {
-				if (tokenLine.getType() != TOKEN_LINE_RELATION) {
+		
+		if (tokenLine.getType() != TOKEN_LINE_RELATION) {
 					throw Exception("Syntax error: Or must have proposition as arguments");
 				}
 				
 				PropositionNode *proposition;
-				createRelationNode(tokenLine, (GDLNode**)&proposition);
+				createPropositionNode(tokenLine, (GDLNode**)&proposition);
 				propositions.push_back(proposition);
 			} catch (Exception &e) {
 				for (size_t i = 0; i < propositions.size(); ++i) {
@@ -236,7 +279,7 @@ void GDLNode::createRuleNode(const TokenLine &tokenLine, GDLNode **nodeOut) {
 	
 }
 
-void GDLNode::createRelationNode(const TokenLine &tokenLine, GDLNode **nodeOut) {
+void GDLNode::createPropositionNode(const TokenLine &tokenLine, GDLNode **nodeOut) {
 	std::vector<TokenLine> tokenLines;
 	
 	breakDownTokenLine(tokenLine, tokenLines);
@@ -273,7 +316,7 @@ void GDLNode::createInputNode(const TokenLine &tokenLine, GDLNode **nodeOut) {
 		
 		Token role = tokenLines[1].getTokens()[0];
 		PropositionNode *proposition;
-		createRelationNode(tokenLines[2], (GDLNode**)&proposition);
+		createPropositionNode(tokenLines[2], (GDLNode**)&proposition);
 		*nodeOut = new InputNode(role, proposition);
 	} catch (std::out_of_range) {
 		throw Exception("Syntax error while creating Input node");
@@ -287,7 +330,7 @@ void GDLNode::createDistinctNode(const TokenLine &tokenLine, GDLNode **nodeOut) 
 	breakDownTokenLine(tokenLine, tokenLines);
 	for (size_t i = 1; i < tokenLines.size(); ++i) {
 		int type = tokenLines[i].getTokens()[0].getType();
-		if (type != TOKENIZER_TOKEN_TYPE_TERM && type != TOKENIZER_TOKEN_TYPE_TERM) {
+		if (type != TOKENIZER_TOKEN_TYPE_TERM && type != TOKENIZER_TOKEN_TYPE_VAR) {
 			throw Exception("Syntax error: Invalid arguments in Distinct");
 		}
 		arguments.push_back(tokenLines[i].getTokens()[0]);
@@ -310,7 +353,7 @@ void GDLNode::createDoesNode(const TokenLine &tokenLine, GDLNode **nodeOut) {
 		
 		Token role = tokenLines[1].getTokens()[0];
 		PropositionNode *proposition;
-		createRelationNode(tokenLines[2], (GDLNode**)&proposition);
+		createPropositionNode(tokenLines[2], (GDLNode**)&proposition);
 		*nodeOut = new DoesNode(role, proposition);
 	} catch (std::out_of_range) {
 		throw Exception("Syntax error while creating Does node");
@@ -324,12 +367,12 @@ void GDLNode::createInitNode(const TokenLine &tokenLine, GDLNode **nodeOut) {
 	breakDownTokenLine(tokenLine, tokenLines);
 	try {
 		if (tokenLines.at(1).getType() != TOKEN_LINE_RELATION) {
-			throw Exception("Syntax error: Base must have proposition as argument");
+			throw Exception("Syntax error: Init must have proposition as argument");
 		}
 		
-		createRelationNode(tokenLines.at(1), (GDLNode**)&proposition);
-		*nodeOut = new BaseNode(proposition);
+		createPropositionNode(tokenLines.at(1), (GDLNode**)&proposition);
+		*nodeOut = new InitNode(proposition);
 	} catch (std::out_of_range) {
-		throw Exception("Syntax error while creating base node");
+		throw Exception("Syntax error while creating init node");
 	}
 }

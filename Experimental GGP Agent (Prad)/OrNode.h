@@ -1,5 +1,5 @@
-#ifndef ORNODE_H
-#define ORNODE_H
+#ifndef OR_NODE_H
+#define OR_NODE_H
 
 #include <vector>
 #include "GDLNode.h"
@@ -14,6 +14,7 @@ public:
 	~OrNode();
 	
 	int getInstanceOf() const;
+	void print(std::string indent) const;
 };
 
 #endif

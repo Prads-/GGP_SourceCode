@@ -1,5 +1,5 @@
-#ifndef NOTNODE_H
-#define NOTNODE_H
+#ifndef NOT_NODE_H
+#define NOT_NODE_H
 
 #include "GDLNode.h"
 #include "PropositionNode.h"
@@ -13,6 +13,7 @@ public:
 	~NotNode();
 	
 	int getInstanceOf() const;
+	void print(std::string indent) const;
 };
 
 #endif // NOTNODE_H

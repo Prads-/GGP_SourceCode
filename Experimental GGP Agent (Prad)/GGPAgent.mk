@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Prads
-Date                   :=11/30/14
+Date                   :=12/01/14
 CodeLitePath           :="/home/prads/.codelite"
 LinkerName             :=/usr/bin/g++ 
 SharedObjectLinkerName :=/usr/bin/g++ -shared -fPIC
@@ -62,7 +62,7 @@ AS       := /usr/bin/as
 CodeLiteDir:=/usr/share/codelite
 Objects0=$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirectory)/Tokenizer.cpp$(ObjectSuffix) $(IntermediateDirectory)/Token.cpp$(ObjectSuffix) $(IntermediateDirectory)/TokenLiner.cpp$(ObjectSuffix) $(IntermediateDirectory)/TokenLine.cpp$(ObjectSuffix) $(IntermediateDirectory)/IfNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/GDLNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/LegalNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/TrueNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/NotNode.cpp$(ObjectSuffix) \
 	$(IntermediateDirectory)/NextNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/OrNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/TerminalNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/GoalNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/RuleNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/PropositionNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/BaseNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/InputNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/DistinctNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/DoesNode.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/InitNode.cpp$(ObjectSuffix) 
+	$(IntermediateDirectory)/InitNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/AST.cpp$(ObjectSuffix) $(IntermediateDirectory)/RelationNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/RoleNode.cpp$(ObjectSuffix) 
 
 
 
@@ -256,6 +256,30 @@ $(IntermediateDirectory)/InitNode.cpp$(DependSuffix): InitNode.cpp
 
 $(IntermediateDirectory)/InitNode.cpp$(PreprocessSuffix): InitNode.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/InitNode.cpp$(PreprocessSuffix) "InitNode.cpp"
+
+$(IntermediateDirectory)/AST.cpp$(ObjectSuffix): AST.cpp $(IntermediateDirectory)/AST.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/prads/Documents/ProgProjects/My Projects/GGPAgent/AST.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/AST.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/AST.cpp$(DependSuffix): AST.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/AST.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/AST.cpp$(DependSuffix) -MM "AST.cpp"
+
+$(IntermediateDirectory)/AST.cpp$(PreprocessSuffix): AST.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/AST.cpp$(PreprocessSuffix) "AST.cpp"
+
+$(IntermediateDirectory)/RelationNode.cpp$(ObjectSuffix): RelationNode.cpp $(IntermediateDirectory)/RelationNode.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/prads/Documents/ProgProjects/My Projects/GGPAgent/RelationNode.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/RelationNode.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/RelationNode.cpp$(DependSuffix): RelationNode.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/RelationNode.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/RelationNode.cpp$(DependSuffix) -MM "RelationNode.cpp"
+
+$(IntermediateDirectory)/RelationNode.cpp$(PreprocessSuffix): RelationNode.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/RelationNode.cpp$(PreprocessSuffix) "RelationNode.cpp"
+
+$(IntermediateDirectory)/RoleNode.cpp$(ObjectSuffix): RoleNode.cpp $(IntermediateDirectory)/RoleNode.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/prads/Documents/ProgProjects/My Projects/GGPAgent/RoleNode.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/RoleNode.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/RoleNode.cpp$(DependSuffix): RoleNode.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/RoleNode.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/RoleNode.cpp$(DependSuffix) -MM "RoleNode.cpp"
+
+$(IntermediateDirectory)/RoleNode.cpp$(PreprocessSuffix): RoleNode.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/RoleNode.cpp$(PreprocessSuffix) "RoleNode.cpp"
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)

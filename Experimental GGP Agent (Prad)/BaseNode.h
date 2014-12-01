@@ -1,5 +1,5 @@
-#ifndef BASENODE_H
-#define BASENODE_H
+#ifndef BASE_NODE_H
+#define BASE_NODE_H
 
 #include "GDLNode.h"
 #include "PropositionNode.h"
@@ -14,6 +14,8 @@ public:
 	int getInstanceOf() const;
 	BaseNode(PropositionNode *proposition);
 	const PropositionNode *getPropositionNode() const;
+	
+	void print(std::string indent) const;
 };
 
 #endif

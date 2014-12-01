@@ -1,5 +1,5 @@
-#ifndef NEXTNODE_H
-#define NEXTNODE_H
+#ifndef NEXT_NODE_H
+#define NEXT_NODE_H
 
 #include "GDLNode.h"
 #include "PropositionNode.h"
@@ -13,6 +13,7 @@ public:
 	~NextNode();
 	
 	int getInstanceOf() const;
+	void print(std::string indent) const;
 };
 
 #endif // NEXTNODE_H

@@ -16,5 +16,6 @@
 #define TOKEN_LINE_DISTINCT			12
 #define TOKEN_LINE_OR					13
 #define TOKEN_LINE_NOT				14
+#define TOKEN_LINE_VAR				15
 
 #endif

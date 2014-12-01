@@ -1,5 +1,5 @@
-#ifndef DISTINCTNODE_H
-#define DISTINCTNODE_H
+#ifndef DISTINCT_NODE_H
+#define DISTINCT_NODE_H
 
 #include <vector>
 #include "GDLNode.h"
@@ -13,6 +13,7 @@ public:
 	DistinctNode(const std::vector<Token> &arguments);
 	
 	int getInstanceOf() const;
+	void print(std::string indent) const;
 };
 
 #endif

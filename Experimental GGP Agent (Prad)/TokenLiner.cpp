@@ -60,6 +60,8 @@ int TokenLiner::getTokenLineTypeFromFirstToken(const Token &token) const {
 			return TOKEN_LINE_OR;
 		case TOKENIZER_TOKEN_TYPE_TERM:
 			return TOKEN_LINE_RELATION;
+		case TOKENIZER_TOKEN_TYPE_VAR:
+			return TOKEN_LINE_VAR;
 		default:
 			throw Exception("Sytax error: Unknown token line type. Cause by token: " + token.getTokenStr());
 	}

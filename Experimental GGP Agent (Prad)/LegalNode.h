@@ -1,5 +1,5 @@
-#ifndef LEGALNODE_H
-#define LEGALNODE_H
+#ifndef LEGAL_NODE_H
+#define LEGAL_NODE_H
 
 #include "Token.h"
 #include "PropositionNode.h"
@@ -15,6 +15,7 @@ public:
 	~LegalNode();
 	
 	int getInstanceOf() const;
+	void print(std::string indent) const;
 };
 
 #endif

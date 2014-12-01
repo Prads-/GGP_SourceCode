@@ -1,3 +1,4 @@
+#include <iostream>
 #include "IfNode.h"
 
 IfNode::IfNode(GDLNode *head, const std::vector<GDLNode*> body) {
@@ -14,4 +15,16 @@ IfNode::~IfNode() {
 
 int IfNode::getInstanceOf() const {
 	return INSTANCE_OF_IF_NODE;
+}
+
+void IfNode::print(std::string indent) const {
+	std::cout << indent << "If Node" << std::endl;
+	indent.push_back('\t');
+	std::cout << indent << "Head:" << std::endl; 
+	head->print(indent);
+	std::cout << indent << "Body:" << std::endl;
+	for (GDLNode *node : body) {
+		node->print(indent);
+	}
+	indent.pop_back();
 }

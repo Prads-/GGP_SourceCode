@@ -69,3 +69,13 @@ void TokenLine::addToken(Token token) {
 void TokenLine::clearTokens() {
 	tokens.clear();
 } 
+
+std::string TokenLine::toString() const {
+	std::string retStr = "";
+	
+	for (const Token &token : tokens) {
+		retStr += token.getTokenStr() + " ";
+	}
+	
+	return retStr;
+}

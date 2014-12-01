@@ -1,5 +1,5 @@
-#ifndef DOESNODE_H
-#define DOESNODE_H
+#ifndef DOES_NODE_H
+#define DOES_NODE_H
 
 #include "GDLNode.h"
 #include "Token.h"
@@ -15,6 +15,7 @@ public:
 	~DoesNode();
 	
 	int getInstanceOf() const;
+	void print(std::string indent) const;
 };
 
 #endif

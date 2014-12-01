@@ -1,5 +1,5 @@
-#ifndef INPUTNODE_H
-#define INPUTNODE_H
+#ifndef INPUT_NODE_H
+#define INPUT_NODE_H
 
 #include "GDLNode.h"
 #include "Token.h"
@@ -15,6 +15,7 @@ public:
 	~InputNode();
 	
 	int getInstanceOf() const;
+	void print(std::string indent) const;
 };
 
 #endif

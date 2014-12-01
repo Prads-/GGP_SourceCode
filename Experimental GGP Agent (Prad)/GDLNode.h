@@ -1,7 +1,8 @@
-#ifndef GDLNODE_H
-#define GDLNODE_H
+#ifndef GDL_NODE_H
+#define GDL_NODE_H
 
 #include <vector>
+#include <string>
 #include "TokenLine.h"
 
 #define INSTANCE_OF_IF_NODE					0
@@ -19,6 +20,8 @@
 #define INSTANCE_OF_DOES_NODE				12
 #define INSTANCE_OF_DISTINCT_NODE			13
 #define INSTANCE_OF_INIT_NODE				14
+#define INSTANCE_OF_RELATION_NODE			15
+#define INSTANCE_OF_ROLE_NODE				16
 
 class GDLNode {
 private:
@@ -32,7 +35,7 @@ private:
 	static void createTerminalNode(GDLNode **nodeOut);
 	static void createGoalNode(const TokenLine &tokenLine, GDLNode **nodeOut);
 	static void createRuleNode(const TokenLine &tokenLine, GDLNode **nodeOut);
-	static void createRelationNode(const TokenLine &tokenLine, GDLNode **nodeOut);
+	static void createPropositionNode(const TokenLine &tokenLine, GDLNode **nodeOut);
 	static void createInputNode(const TokenLine &tokenLine, GDLNode **nodeOut);
 	static void createDistinctNode(const TokenLine &tokenLine, GDLNode **nodeOut);
 	static void createDoesNode(const TokenLine &tokenLine, GDLNode **nodeOut);
@@ -43,8 +46,11 @@ private:
 public:
 	virtual ~GDLNode() { }
 	virtual int getInstanceOf() const = 0;
+	virtual void print(std::string indent) const = 0;
 	
-	static GDLNode *createGDLNode(const TokenLine &tokenLine);
+	static GDLNode *createGDLNodes(const TokenLine &tokenLine);
+	static GDLNode *createRelationNode(const TokenLine &tokenLine);
+	static GDLNode *createRoleNode(const TokenLine &tokenLine);
 };
 
 #endif

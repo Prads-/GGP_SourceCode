@@ -1,5 +1,5 @@
-#ifndef GOALNODE_H
-#define GOALNODE_H
+#ifndef GOAL_NODE_H
+#define GOAL_NODE_H
 
 #include "GDLNode.h"
 
@@ -12,6 +12,7 @@ public:
 	GoalNode(const Token &role, int value);
 
 	int getInstanceOf() const;
+	void print(std::string indent) const;
 };
 
 #endif // GOALNODE_H

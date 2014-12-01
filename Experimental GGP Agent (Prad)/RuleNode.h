@@ -1,5 +1,5 @@
-#ifndef RULENODE_H
-#define RULENODE_H
+#ifndef RULE_NODE_H
+#define RULE_NODE_H
 
 class RuleNode
 {

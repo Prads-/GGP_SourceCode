@@ -3,6 +3,7 @@
 #include "Tokenizer.h"
 #include "TokenLiner.h"
 #include "Exception.h"
+#include "AST.h"
 using namespace std;
 
 int main() {
@@ -14,16 +15,23 @@ int main() {
 		TokenLiner tokenLiner;
 		vector<TokenLine> tokenLines;
 		tokenLiner.createLines(tokens, tokenLines);
-		tokenLiner.createLines(tokenLines[tokenLines.size() - 6].getTokens(), tokenLines);
-		tokenLiner.createLines(tokenLines[tokenLines.size() - 4].getTokens(), tokenLines);
 		
-		for (TokenLine &tokenLine : tokenLines) {
-			tokenLine.print();
+		vector<GDLNode*> ast;
+		AST astCreator;
+		
+		astCreator.createAST(tokenLines, ast);
+		for (GDLNode *node : ast) {
+			node->print("");
+		}
+		
+		for (size_t i = 0; i < ast.size(); ++i) {
+			delete ast[i];
 		}
 	} catch (Exception &e) {
-		cout << e.getMessage();
+		cout << e.getMessage() << endl;
 	}
 	
+	cout << "Done!!!";
 	cin.get();
 	return 0;
 }

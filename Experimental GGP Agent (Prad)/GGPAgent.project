@@ -65,10 +65,22 @@
         <File Name="DoesNode.cpp"/>
         <File Name="InitNode.h"/>
         <File Name="InitNode.cpp"/>
+        <File Name="AST.h"/>
+        <File Name="AST.cpp"/>
+        <File Name="RelationNode.h"/>
+        <File Name="RelationNode.cpp"/>
+        <File Name="RoleNode.h"/>
+        <File Name="RoleNode.cpp"/>
       </VirtualDirectory>
     </VirtualDirectory>
     <VirtualDirectory Name="Exception">
       <File Name="Exception.h"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="SymbolTable">
+      <File Name="SymbolTable.h"/>
+      <File Name="SymbolTable.cpp"/>
+      <File Name="Symbol.h"/>
+      <File Name="Symbol.cpp"/>
     </VirtualDirectory>
   </VirtualDirectory>
   <Settings Type="Executable">

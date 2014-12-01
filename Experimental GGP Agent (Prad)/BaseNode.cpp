@@ -1,3 +1,4 @@
+#include <iostream>
 #include "BaseNode.h"
 
 BaseNode::~BaseNode() {
@@ -14,4 +15,11 @@ const PropositionNode *BaseNode::getPropositionNode() const {
 
 int BaseNode::getInstanceOf() const {
 	return INSTANCE_OF_BASE_NODE;
+}
+
+void BaseNode::print(std::string indent) const {
+	std::cout << indent << "Base Node" << std::endl;
+	indent.push_back('\t');
+	proposition->print(indent);
+	indent.pop_back();
 }

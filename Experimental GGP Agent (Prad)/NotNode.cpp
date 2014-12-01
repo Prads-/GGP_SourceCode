@@ -1,3 +1,4 @@
+#include <iostream>
 #include "NotNode.h"
 
 NotNode::NotNode(PropositionNode *proposition) {
@@ -10,4 +11,11 @@ NotNode::~NotNode() {
 	
 int NotNode::getInstanceOf() const {
 	return INSTANCE_OF_NOT_NODE;
+}
+
+void NotNode::print(std::string indent) const {
+	std::cout << indent << "Not Node" << std::endl;
+	indent.push_back('\t');
+	proposition->print(indent);
+	indent.pop_back();
 }

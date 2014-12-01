@@ -1,5 +1,5 @@
-#ifndef IFNODE_H
-#define IFNODE_H
+#ifndef IF_NODE_H
+#define IF_NODE_H
 
 #include <vector>
 #include "GDLNode.h"
@@ -15,6 +15,7 @@ public:
 	~IfNode();
 	
 	int getInstanceOf() const;
+	void print(std::string indent) const;
 };
 
 #endif

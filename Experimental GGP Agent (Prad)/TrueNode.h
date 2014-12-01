@@ -1,5 +1,5 @@
-#ifndef TRUENODE_H
-#define TRUENODE_H
+#ifndef TRUE_NODE_H
+#define TRUE_NODE_H
 
 #include "GDLNode.h"
 #include "PropositionNode.h"
@@ -13,6 +13,7 @@ public:
 	~TrueNode();
 	
 	int getInstanceOf() const;
+	void print(std::string indent) const;
 };
 
 #endif // TRUENODE_H

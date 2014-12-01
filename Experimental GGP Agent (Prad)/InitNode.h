@@ -1,9 +1,18 @@
-#ifndef INITNODE_H
-#define INITNODE_H
+#ifndef INIT_NODE_H
+#define INIT_NODE_H
 
-class InitNode {
+#include "GDLNode.h"
+#include "PropositionNode.h"
+
+class InitNode : public GDLNode {
+private:
+	PropositionNode *proposition;
+
 public:
-
+	InitNode(PropositionNode *proposition);
+	
+	int getInstanceOf() const;
+	void print(std::string indent) const;
 };
 
 #endif
