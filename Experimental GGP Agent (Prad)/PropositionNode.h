@@ -16,6 +16,9 @@ public:
 	
 	int getInstanceOf() const;
 	void print(std::string indent) const;
+	
+	std::string getName() const;
+	const std::vector<Token> &getArguments() const;
 };
 
 #endif

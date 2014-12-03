@@ -14,3 +14,7 @@ void RoleNode::print(std::string indent) const {
 	std::cout << indent << '\t' << "Role: ";
 	role.print();
 }
+
+const Token &RoleNode::getRole() const {
+	return role;
+}

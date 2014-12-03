@@ -14,12 +14,18 @@ class Symbol {
 private:
 	SymbolType type;
 	std::string name;
-	int numOfArgument;
+	size_t numOfArgument;
 	std::vector<std::string> *argumentDomains;
 	
 public:
-	Symbol(std::string name, int numOfArgument);
+	Symbol(std::string name, SymbolType type, int numOfArgument);
 	~Symbol();
+	
+	void addArgument(size_t index, const std::string &argument);
+	
+	size_t getNumOfArgument() const;
+	SymbolType getType() const;
+	const std::vector<std::string> &getArgumentDomain(size_t index) const;
 };
 
 #endif

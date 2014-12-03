@@ -20,3 +20,11 @@ void RelationNode::print(std::string indent) const {
 	}
 	indent.pop_back();
 }
+
+std::string RelationNode::getName() const {
+	return name;
+}
+
+const std::vector<Token> &RelationNode::getArguments() const {
+	return arguments;
+}

@@ -20,3 +20,11 @@ void PropositionNode::print(std::string indent) const {
 	}
 	indent.pop_back();
 }
+
+std::string PropositionNode::getName() const {
+	return name;
+}
+
+const std::vector<Token> &PropositionNode::getArguments() const {
+	return arguments;
+}

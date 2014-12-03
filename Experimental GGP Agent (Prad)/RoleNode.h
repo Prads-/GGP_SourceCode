@@ -13,6 +13,8 @@ public:
 	
 	int getInstanceOf() const;
 	void print(std::string indent) const;
+	
+	const Token &getRole() const;
 };
 
 #endif
