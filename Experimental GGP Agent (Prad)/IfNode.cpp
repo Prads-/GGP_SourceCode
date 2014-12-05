@@ -28,3 +28,11 @@ void IfNode::print(std::string indent) const {
 	}
 	indent.pop_back();
 }
+
+const GDLNode *IfNode::getHead() const {
+	return head;
+}
+
+const std::vector<GDLNode*> &IfNode::getBody() const {
+	return body;
+}

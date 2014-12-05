@@ -4,9 +4,11 @@
 #include "TokenLiner.h"
 #include "Exception.h"
 #include "AST.h"
+#include "SymbolTable.h"
 using namespace std;
 
 int main() {
+	vector<GDLNode*> ast;
 	try {
 		Tokenizer tokenizer;
 		vector<Token> tokens;
@@ -16,19 +18,18 @@ int main() {
 		vector<TokenLine> tokenLines;
 		tokenLiner.createLines(tokens, tokenLines);
 		
-		vector<GDLNode*> ast;
-		AST astCreator;
-		
+		AST astCreator;		
 		astCreator.createAST(tokenLines, ast);
-		for (GDLNode *node : ast) {
-			node->print("");
-		}
-		
-		for (size_t i = 0; i < ast.size(); ++i) {
-			delete ast[i];
-		}
+
+		SymbolTable symbolTable;
+		symbolTable.addSymbols(ast);
+		symbolTable.print();
 	} catch (Exception &e) {
 		cout << e.getMessage() << endl;
+	}
+	
+	for (size_t i = 0; i < ast.size(); ++i) {
+		delete ast[i];
 	}
 	
 	cout << "Done!!!";

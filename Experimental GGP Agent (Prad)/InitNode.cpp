@@ -15,3 +15,7 @@ void InitNode::print(std::string indent) const {
 	proposition->print(indent);
 	indent.pop_back();
 }
+
+const PropositionNode *InitNode::getProposition() const {
+	return proposition;
+}

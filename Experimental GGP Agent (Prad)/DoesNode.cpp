@@ -22,3 +22,11 @@ void DoesNode::print(std::string indent) const {
 	action->print(indent);
 	indent.pop_back();
 }
+
+const Token &DoesNode::getRole() const {
+	return role;
+}
+
+const PropositionNode *DoesNode::getAction() const {
+	return action;
+}

@@ -23,3 +23,7 @@ void BaseNode::print(std::string indent) const {
 	proposition->print(indent);
 	indent.pop_back();
 }
+
+const PropositionNode *BaseNode::getProposition() const {
+	return proposition;
+}

@@ -19,3 +19,7 @@ void TrueNode::print(std::string indent) const {
 	proposition->print(indent);
 	indent.pop_back();
 }
+
+const PropositionNode *TrueNode::getProposition() const {
+	return proposition;
+}

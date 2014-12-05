@@ -7,7 +7,8 @@
 enum SymbolType {
 	SYMBOL_TYPE_RELATION,
 	SYMBOL_TYPE_PROPOSITION,
-	SYMBOL_TYPE_RULE
+	SYMBOL_TYPE_RULE,
+	SYMBOL_TYPE_ACTION
 };
 
 class Symbol {
@@ -26,6 +27,11 @@ public:
 	size_t getNumOfArgument() const;
 	SymbolType getType() const;
 	const std::vector<std::string> &getArgumentDomain(size_t index) const;
+	
+	void setType(SymbolType type);
+	
+	std::string getTypeStr() const;
+	void print() const;
 };
 
 #endif

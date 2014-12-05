@@ -22,3 +22,11 @@ void InputNode::print(std::string indent) const {
 	action->print(indent);
 	indent.pop_back();
 }
+
+const Token &InputNode::getRole() const {
+	return role;
+}
+
+const PropositionNode *InputNode::getAction() const {
+	return action;
+}

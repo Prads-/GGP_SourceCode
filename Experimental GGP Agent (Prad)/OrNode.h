@@ -15,6 +15,8 @@ public:
 	
 	int getInstanceOf() const;
 	void print(std::string indent) const;
+	
+	const std::vector<PropositionNode*> &getPropositions() const;
 };
 
 #endif

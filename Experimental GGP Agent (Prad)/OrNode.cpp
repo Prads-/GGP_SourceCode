@@ -23,3 +23,7 @@ void OrNode::print(std::string indent) const {
 	}
 	indent.pop_back();
 }
+
+const std::vector<PropositionNode*> &OrNode::getPropositions() const {
+	return propositions;
+}

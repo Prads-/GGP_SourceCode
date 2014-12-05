@@ -16,6 +16,8 @@ public:
 	const PropositionNode *getPropositionNode() const;
 	
 	void print(std::string indent) const;
+	
+	const PropositionNode *getProposition() const;
 };
 
 #endif

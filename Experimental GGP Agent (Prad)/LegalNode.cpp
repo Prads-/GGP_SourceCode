@@ -22,3 +22,11 @@ void LegalNode::print(std::string indent) const {
 	action->print(indent);
 	indent.pop_back();
 }
+
+const Token &LegalNode::getRole() const {
+	return role;
+}
+
+const PropositionNode *LegalNode::getAction() const {
+	return action;
+}

@@ -19,3 +19,7 @@ void NotNode::print(std::string indent) const {
 	proposition->print(indent);
 	indent.pop_back();
 }
+
+const PropositionNode *NotNode::getProposition() const {
+	return proposition;
+}

@@ -16,6 +16,9 @@ public:
 	
 	int getInstanceOf() const;
 	void print(std::string indent) const;
+	
+	const GDLNode *getHead() const;
+	const std::vector<GDLNode*> &getBody() const;
 };
 
 #endif
