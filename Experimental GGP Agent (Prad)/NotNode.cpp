@@ -23,3 +23,7 @@ void NotNode::print(std::string indent) const {
 const PropositionNode *NotNode::getProposition() const {
 	return proposition;
 }
+
+void NotNode::getVarTable(VarTable &varTableOut) const {
+	proposition->getVarTable(varTableOut);
+}

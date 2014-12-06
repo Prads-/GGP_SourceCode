@@ -290,3 +290,15 @@ void SymbolTable::print() const {
 		it->second->print();
 	}
 }
+
+Symbol *SymbolTable::getSymbol(std::string name) {
+	STable::iterator it = table.find(name);
+	if (it == table.end()) {
+		return 0;
+	}
+	return it->second;
+}
+
+const std::vector<std::string> &SymbolTable::getRoles() const {
+	return roles;
+}

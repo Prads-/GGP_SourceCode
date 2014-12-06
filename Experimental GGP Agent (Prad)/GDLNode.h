@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include "TokenLine.h"
+#include "VarTable.h"
 
 #define INSTANCE_OF_IF_NODE					0
 #define INSTANCE_OF_LEGAL_NODE				1
@@ -43,10 +44,14 @@ private:
 	
 	static void breakDownTokenLine(const TokenLine &tokenLine, std::vector<TokenLine> &tokenLinesOut);
 	
+protected:
+	void addToVarTable(std::string varName, std::string propName, size_t index, VarTable &varTableOut) const;
+	
 public:
 	virtual ~GDLNode() { }
 	virtual int getInstanceOf() const = 0;
 	virtual void print(std::string indent) const = 0;
+	virtual void getVarTable(VarTable &varTableOut) const = 0;
 	
 	static GDLNode *createGDLNodes(const TokenLine &tokenLine);
 	static GDLNode *createRelationNode(const TokenLine &tokenLine);

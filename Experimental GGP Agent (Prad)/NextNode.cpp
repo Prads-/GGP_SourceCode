@@ -23,3 +23,7 @@ void NextNode::print(std::string indent) const {
 const PropositionNode *NextNode::getProposition() const {
 	return proposition;
 }
+
+void NextNode::getVarTable(VarTable &varTableOut) const {
+	proposition->getVarTable(varTableOut);
+}

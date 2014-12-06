@@ -19,6 +19,7 @@ public:
 	
 	const Token &getRole() const;
 	const PropositionNode *getAction() const;
+	void getVarTable(VarTable &varTableOut) const;
 };
 
 #endif

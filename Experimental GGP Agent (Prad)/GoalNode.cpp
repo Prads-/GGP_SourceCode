@@ -1,5 +1,6 @@
 #include <iostream>
 #include "GoalNode.h"
+#include "TokenType.h"
 
 GoalNode::GoalNode(const Token &role, int value) {
 	this->role = role;
@@ -17,4 +18,10 @@ void GoalNode::print(std::string indent) const {
 	role.print();
 	std::cout << indent << "Value: " << value << std::endl;
 	indent.pop_back();
+}
+
+void GoalNode::getVarTable(VarTable &varTableOut) const {
+	if (role.getType() == TOKENIZER_TOKEN_TYPE_VAR) {
+		addToVarTable(role.getTokenStr(), "role", 0, varTableOut);
+	}
 }

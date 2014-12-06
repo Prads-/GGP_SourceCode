@@ -19,6 +19,8 @@ public:
 	
 	std::string getName() const;
 	const std::vector<Token> &getArguments() const;
+	
+	void getVarTable(VarTable &varTableOut) const { }
 };
 
 #endif

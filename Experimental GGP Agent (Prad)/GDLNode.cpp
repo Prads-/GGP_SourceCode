@@ -376,3 +376,15 @@ void GDLNode::createInitNode(const TokenLine &tokenLine, GDLNode **nodeOut) {
 		throw Exception("Syntax error while creating init node");
 	}
 }
+
+void GDLNode::addToVarTable(std::string varName, std::string propName, size_t index, VarTable &varTableOut) const {
+	VarTable::iterator it = varTableOut.find(varName);
+	if (it != varTableOut.end()) {
+		it->second.addAddress(VarAddress(propName, index));
+	} else {
+		Variable variable(varName);
+		variable.addAddress(VarAddress(propName, index));
+		std::pair<std::string, Variable> entry(varName, variable);
+		varTableOut.insert(entry);
+	}
+}

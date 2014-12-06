@@ -23,3 +23,7 @@ void TrueNode::print(std::string indent) const {
 const PropositionNode *TrueNode::getProposition() const {
 	return proposition;
 }
+
+void TrueNode::getVarTable(VarTable &varTableOut) const {
+	proposition->getVarTable(varTableOut);
+}

@@ -82,6 +82,12 @@
       <File Name="Symbol.h"/>
       <File Name="Symbol.cpp"/>
     </VirtualDirectory>
+    <VirtualDirectory Name="DomainFinder">
+      <File Name="DomainFinder.h"/>
+      <File Name="DomainFinder.cpp"/>
+      <File Name="VarTable.h"/>
+      <File Name="VarTable.cpp"/>
+    </VirtualDirectory>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>

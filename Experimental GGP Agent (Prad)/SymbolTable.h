@@ -47,6 +47,8 @@ private:
 public:
 	~SymbolTable();
 
+	Symbol *getSymbol(std::string name);
+	const std::vector<std::string> &getRoles() const;
 	void addSymbols(const std::vector<GDLNode*> &ast);
 	
 	void print() const;

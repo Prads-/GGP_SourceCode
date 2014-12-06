@@ -27,3 +27,7 @@ void BaseNode::print(std::string indent) const {
 const PropositionNode *BaseNode::getProposition() const {
 	return proposition;
 }
+
+void BaseNode::getVarTable(VarTable &varTableOut) const {
+	proposition->getVarTable(varTableOut);
+}

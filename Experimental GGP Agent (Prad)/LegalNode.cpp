@@ -1,5 +1,6 @@
 #include <iostream>
 #include "LegalNode.h"
+#include "TokenType.h"
 
 LegalNode::LegalNode(const Token &role, PropositionNode *action) {
 	this->role = role;
@@ -29,4 +30,11 @@ const Token &LegalNode::getRole() const {
 
 const PropositionNode *LegalNode::getAction() const {
 	return action;
+}
+
+void LegalNode::getVarTable(VarTable &varTableOut) const {
+	if (role.getType() == TOKENIZER_TOKEN_TYPE_VAR) {
+		addToVarTable(role.getTokenStr(), "role", 0, varTableOut);
+	}
+	action->getVarTable(varTableOut);
 }

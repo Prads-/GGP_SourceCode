@@ -14,6 +14,8 @@ public:
 	
 	int getInstanceOf() const;
 	void print(std::string indent) const;
+	
+	void getVarTable(VarTable &varTableOut) const { }
 };
 
 #endif

@@ -76,3 +76,7 @@ void Symbol::print() const {
 	}
 	std::cout << "------------------------------------" << std::endl;
 }
+
+std::vector<std::string> &Symbol::getArgumentDomainModifiable(size_t index) {
+	return argumentDomains[index];
+}

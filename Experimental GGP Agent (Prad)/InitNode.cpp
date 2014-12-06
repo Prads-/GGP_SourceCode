@@ -19,3 +19,7 @@ void InitNode::print(std::string indent) const {
 const PropositionNode *InitNode::getProposition() const {
 	return proposition;
 }
+
+void InitNode::getVarTable(VarTable &varTableOut) const {
+	proposition->getVarTable(varTableOut);
+}

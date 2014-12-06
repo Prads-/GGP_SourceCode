@@ -15,6 +15,7 @@ public:
 	void print(std::string indent) const;
 	
 	const Token &getRole() const;
+	void getVarTable(VarTable &varTableOut) const;
 };
 
 #endif

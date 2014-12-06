@@ -27,3 +27,9 @@ void OrNode::print(std::string indent) const {
 const std::vector<PropositionNode*> &OrNode::getPropositions() const {
 	return propositions;
 }
+
+void OrNode::getVarTable(VarTable &varTableOut) const {
+	for (const PropositionNode *proposition : propositions) {
+		proposition->getVarTable(varTableOut);
+	}
+}

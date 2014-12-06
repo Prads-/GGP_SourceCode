@@ -1,5 +1,6 @@
 #include <iostream>
 #include "DoesNode.h"
+#include "TokenType.h"
 
 DoesNode::DoesNode(const Token &role, PropositionNode *action) {
 	this->role = role;
@@ -29,4 +30,11 @@ const Token &DoesNode::getRole() const {
 
 const PropositionNode *DoesNode::getAction() const {
 	return action;
+}
+
+void DoesNode::getVarTable(VarTable &varTableOut) const {
+	if (role.getType() == TOKENIZER_TOKEN_TYPE_VAR) {
+		addToVarTable(role.getTokenStr(), "role", 0, varTableOut);
+	}
+	action->getVarTable(varTableOut);
 }

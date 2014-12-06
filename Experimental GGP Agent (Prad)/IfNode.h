@@ -19,6 +19,8 @@ public:
 	
 	const GDLNode *getHead() const;
 	const std::vector<GDLNode*> &getBody() const;
+	
+	void getVarTable(VarTable &varTableOut) const;
 };
 
 #endif

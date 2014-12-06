@@ -27,6 +27,7 @@ public:
 	size_t getNumOfArgument() const;
 	SymbolType getType() const;
 	const std::vector<std::string> &getArgumentDomain(size_t index) const;
+	std::vector<std::string> &getArgumentDomainModifiable(size_t index);
 	
 	void setType(SymbolType type);
 	

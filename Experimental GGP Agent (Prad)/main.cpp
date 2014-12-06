@@ -5,6 +5,7 @@
 #include "Exception.h"
 #include "AST.h"
 #include "SymbolTable.h"
+#include "DomainFinder.h"
 using namespace std;
 
 int main() {
@@ -23,6 +24,7 @@ int main() {
 
 		SymbolTable symbolTable;
 		symbolTable.addSymbols(ast);
+		DomainFinder::findDomain(ast, symbolTable);
 		symbolTable.print();
 	} catch (Exception &e) {
 		cout << e.getMessage() << endl;

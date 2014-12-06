@@ -36,3 +36,10 @@ const GDLNode *IfNode::getHead() const {
 const std::vector<GDLNode*> &IfNode::getBody() const {
 	return body;
 }
+
+void IfNode::getVarTable(VarTable &varTableOut) const {
+	head->getVarTable(varTableOut);
+	for (const GDLNode *gdlNode : body) {
+		gdlNode->getVarTable(varTableOut);
+	}
+}

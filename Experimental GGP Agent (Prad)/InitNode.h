@@ -15,6 +15,7 @@ public:
 	void print(std::string indent) const;
 	
 	const PropositionNode *getProposition() const;
+	void getVarTable(VarTable &varTableOut) const;
 };
 
 #endif

@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Prads
-Date                   :=12/05/14
+Date                   :=12/07/14
 CodeLitePath           :="/home/prads/.codelite"
 LinkerName             :=/usr/bin/g++ 
 SharedObjectLinkerName :=/usr/bin/g++ -shared -fPIC
@@ -60,9 +60,9 @@ AS       := /usr/bin/as
 ## User defined environment variables
 ##
 CodeLiteDir:=/usr/share/codelite
-Objects0=$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirectory)/Tokenizer.cpp$(ObjectSuffix) $(IntermediateDirectory)/Token.cpp$(ObjectSuffix) $(IntermediateDirectory)/TokenLiner.cpp$(ObjectSuffix) $(IntermediateDirectory)/TokenLine.cpp$(ObjectSuffix) $(IntermediateDirectory)/SymbolTable.cpp$(ObjectSuffix) $(IntermediateDirectory)/Symbol.cpp$(ObjectSuffix) $(IntermediateDirectory)/IfNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/GDLNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/LegalNode.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/TrueNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/NotNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/NextNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/OrNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/TerminalNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/GoalNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/RuleNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/PropositionNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/BaseNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/InputNode.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/DistinctNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/DoesNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/InitNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/AST.cpp$(ObjectSuffix) $(IntermediateDirectory)/RelationNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/RoleNode.cpp$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirectory)/Tokenizer.cpp$(ObjectSuffix) $(IntermediateDirectory)/Token.cpp$(ObjectSuffix) $(IntermediateDirectory)/TokenLiner.cpp$(ObjectSuffix) $(IntermediateDirectory)/TokenLine.cpp$(ObjectSuffix) $(IntermediateDirectory)/SymbolTable.cpp$(ObjectSuffix) $(IntermediateDirectory)/Symbol.cpp$(ObjectSuffix) $(IntermediateDirectory)/DomainFinder.cpp$(ObjectSuffix) $(IntermediateDirectory)/VarTable.cpp$(ObjectSuffix) $(IntermediateDirectory)/IfNode.cpp$(ObjectSuffix) \
+	$(IntermediateDirectory)/GDLNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/LegalNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/TrueNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/NotNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/NextNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/OrNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/TerminalNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/GoalNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/RuleNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/PropositionNode.cpp$(ObjectSuffix) \
+	$(IntermediateDirectory)/BaseNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/InputNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/DistinctNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/DoesNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/InitNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/AST.cpp$(ObjectSuffix) $(IntermediateDirectory)/RelationNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/RoleNode.cpp$(ObjectSuffix) 
 
 
 
@@ -144,6 +144,22 @@ $(IntermediateDirectory)/Symbol.cpp$(DependSuffix): Symbol.cpp
 
 $(IntermediateDirectory)/Symbol.cpp$(PreprocessSuffix): Symbol.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Symbol.cpp$(PreprocessSuffix) "Symbol.cpp"
+
+$(IntermediateDirectory)/DomainFinder.cpp$(ObjectSuffix): DomainFinder.cpp $(IntermediateDirectory)/DomainFinder.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/prads/Documents/ProgProjects/My Projects/GGPAgent/DomainFinder.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/DomainFinder.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/DomainFinder.cpp$(DependSuffix): DomainFinder.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/DomainFinder.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/DomainFinder.cpp$(DependSuffix) -MM "DomainFinder.cpp"
+
+$(IntermediateDirectory)/DomainFinder.cpp$(PreprocessSuffix): DomainFinder.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/DomainFinder.cpp$(PreprocessSuffix) "DomainFinder.cpp"
+
+$(IntermediateDirectory)/VarTable.cpp$(ObjectSuffix): VarTable.cpp $(IntermediateDirectory)/VarTable.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/prads/Documents/ProgProjects/My Projects/GGPAgent/VarTable.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/VarTable.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/VarTable.cpp$(DependSuffix): VarTable.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/VarTable.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/VarTable.cpp$(DependSuffix) -MM "VarTable.cpp"
+
+$(IntermediateDirectory)/VarTable.cpp$(PreprocessSuffix): VarTable.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/VarTable.cpp$(PreprocessSuffix) "VarTable.cpp"
 
 $(IntermediateDirectory)/IfNode.cpp$(ObjectSuffix): IfNode.cpp $(IntermediateDirectory)/IfNode.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/prads/Documents/ProgProjects/My Projects/GGPAgent/IfNode.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/IfNode.cpp$(ObjectSuffix) $(IncludePath)
