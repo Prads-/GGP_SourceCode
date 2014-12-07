@@ -101,7 +101,8 @@ std::string Tokenizer::subString(const std::string &line, size_t &counter) const
 	std::string retStr;
 	
 	for ( ; counter < line.size(); ++counter) {
-		if (line[counter] == ' ' || line[counter] == ')' || line[counter] == '(') {
+		if (line[counter] == ' ' || line[counter] == ')' || line[counter] == '(' ||
+				line[counter] == '\t' || line[counter] == '\r' || line[counter] == '\n') {
 			--counter;
 			break;
 		}
